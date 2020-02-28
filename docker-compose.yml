@@ -1,0 +1,21 @@
+version: '3'
+services:
+    api:
+        build:
+            context: ./
+            dockerfile: ./api/Dockerfile
+        ports:
+            - 9000:9000
+        volumes:
+            - ./api/nonsto:/usr/share/api
+    web:
+        build:
+            context: ./
+            dockerfile: ./web/Dockerfile
+        ports:
+            - 80:80
+        volumes:
+            - ./web/www/nonsto:/usr/share/nginx/www/html
+            - ./web/conf/default.conf:/etc/nginx/conf.d/default.conf
+        depends_on:
+            - api
