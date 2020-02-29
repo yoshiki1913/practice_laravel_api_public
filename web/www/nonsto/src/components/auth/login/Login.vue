@@ -37,22 +37,29 @@ export default {
       })
     },
     hoge: function () {
+      // fetchの場合
       fetch('http://localhost:8000/api/hoge', {
         // credentials: 'include',
         mode: 'cors',
+        method: 'post',
         headers: {
           'Content-Type': 'application/json; charset=utf-8'
         }}).then(response => {
         console.log(response)
       })
-      // const axiosPost = axios.create({
-      //   xsrfHeaderName: 'X-CSRF-Token',
-      //   withCredentials: true
-      // })
 
-      // axiosPost.get('http://localhost:8000/api/hoge', {hoge: 'gggggg', huga: 'jjjjjj'}).then(response => {
-      //   console.log(response)
-      // })
+      // axiosの場合
+      const axiosPost = axios.create({
+        xsrfHeaderName: 'X-CSRF-Token'
+        // withCredentials: true
+      })
+      axiosPost.post('http://localhost:8000/api/hoge', {
+        headers: {
+          mode: 'cors'
+        }
+      }).then(response => {
+        console.log(response)
+      })
     }
   }
 }

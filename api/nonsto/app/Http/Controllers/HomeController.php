@@ -13,7 +13,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     /**
@@ -27,6 +27,6 @@ class HomeController extends Controller
     }
 
     public function hoge(Request $request) {
-        return json()->response($request);
+        return response()->json();
     }
 }
