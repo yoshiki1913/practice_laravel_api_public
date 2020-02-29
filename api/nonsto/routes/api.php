@@ -14,22 +14,9 @@ use Illuminate\Http\Request;
 */
 
 Route::group(['middleware' => ['cors']], function () {
-    // Route::options('hoge', function () {
-    //     return response()->json('hoge', 200, [
-    //         'Access-Control-Allow-Origin' => '*',
-    //         'Access-Control-Allow-Headers' => 'Origin, X-Requested-With, Content-Type, Accept',
-    //     ]);
-    // });
-    Route::post('/login', 'Api\V1\Auth\LoginController@login');
-    Route::get(["get", "options"], "/hoge", "HomeController@hoge");
-});
-
-Route::group(['prefix' => 'v1', 'middleware' => ['auth:api']], function () {
-    Route::get('/hoge', function () {
-        return "hogehoeg";
-    });
-});
-
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+    // Route::options("/hoge", "HomeController@hoge");
+    // Route::get("/hoge", "HomeController@hoge");
+    // or
+    Route::match(["post", "options"], "/hoge", "HomeController@hoge");
+    Route::match(['post', 'options'], '/login', 'Api\V1\Auth\LoginController@login');
 });
