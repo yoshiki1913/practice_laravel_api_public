@@ -12,7 +12,6 @@ class LoginController extends Controller
     public function login(Request $request): JsonResponse
     {
         $credentials = $request->only('email', 'password');
-
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
             $token = $user->createToken('Laravel Password Grant Client')->accessToken;

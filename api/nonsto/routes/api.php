@@ -18,5 +18,10 @@ Route::group(['middleware' => ['cors']], function () {
     // Route::get("/hoge", "HomeController@hoge");
     // or
     Route::match(["post", "options"], "/hoge", "HomeController@hoge");
-    Route::match(['post', 'options'], '/login', 'Api\V1\Auth\LoginController@login');
+
+    // HTTPリクエストのoptionsでcorsのpreflightをしています。200が返却されるようにしないとcorsエラーになります
+    Route::options("/login", function() {
+        return response()->json();
+    });
+    Route::post('/login', 'Api\V1\Auth\LoginController@login');
 });

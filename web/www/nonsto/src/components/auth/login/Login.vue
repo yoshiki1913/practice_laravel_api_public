@@ -1,11 +1,11 @@
 <template>
   <div class="">
     {{ id }}
-    <from>
-      <input type="email" name="email" v-model="email">
-      <input type="password" name="password" v-model="password">
-      <button value="send" @click="login()">login</button>
-    </from>
+    <form  @submit.prevent="login">
+      <input type="email" v-model="email">
+      <input type="password" v-model="password">
+      <button value="send">login</button>
+    </form>
     <button value="send" @click="hoge()">hoge</button>
   </div>
 </template>
@@ -26,8 +26,8 @@ export default {
       let param = {email: this.email, password: this.password}
 
       const axiosPost = axios.create({
-        xsrfHeaderName: 'X-CSRF-Token',
-        withCredentials: true
+        xsrfHeaderName: 'X-CSRF-Token'
+        // withCredentials: true
       })
 
       axiosPost.post('http://localhost:8000/api/login', param).then(response => {
